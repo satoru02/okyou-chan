@@ -1,7 +1,13 @@
 <template>
-  <Tutorial/>
+  <Header />
 </template>
 
 <script>
-export default {}
+import Header from '@/components/Header.vue'
+export default {
+  components: {
+    Header,
+    'Footer': () => import('@/components/Phrase.vue'),
+  }
+}
 </script>
