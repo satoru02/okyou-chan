@@ -1,17 +1,32 @@
 <template>
-    <div class="row">
+  <div class="row">
     <div class="column">
+      <paginate name="phrases" :list="phrases" :per="perCount">
         <div class="txt">
-          <div class="phrase_section" v-for="(t,index) in 150" :key="index">
-            <ruby>なむみょうほうれんげきょう<p>南無妙法蓮華経</p></ruby>
-          </div>
+          <phrase v-for="(phrase, index) in paginated('phrases')" :key="index" :name="phrase" :pronounce="'ふりがな'" />
         </div>
+      </paginate>
     </div>
+    <footer>
+      <paginate-links class="cursor-pointer" for="phrases" :show-step-links="true" />
+    </footer>
   </div>
 </template>
 
 <script>
-export default {}
+  export default {
+    data() {
+      return {
+        phrases: ['南無妙法蓮華経', '南無妙法蓮華経', '妙法蓮華教', '妙法蓮華教'],
+        paginate: ['phrases'],
+        perCount: 1
+      }
+    },
+    components: {
+      'Phrase': () => import('@/components/Phrase.vue'),
+    },
+  }
+
 </script>
 
 <style lang="postcss">
@@ -220,4 +235,5 @@ export default {}
     font-size: 17px;
     padding-left: 15;
   }
+
 </style>
