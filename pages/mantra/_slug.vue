@@ -3,7 +3,7 @@
     <div class="column">
       <paginate name="phrases" :list="phrases" :per="perCount">
         <div class="txt">
-          <phrase v-for="(phrase, index) in paginated('phrases')" :key="index" :name="phrase" :pronounce="'ふりがな'" />
+          <phrase v-for="(phrase, index) in paginated('phrases')" :key="index" :name="phrase.title" :pronounce="phrase.pronounce" />
         </div>
       </paginate>
     </div>
@@ -14,16 +14,29 @@
 </template>
 
 <script>
+  const getTestPhrases = () => import('@/static/testPhrase.json').then(j => j.default || j);
+
   export default {
+    components: {
+      'Phrase': () => import('@/components/Phrase.vue'),
+    },
     data() {
       return {
         phrases: ['南無妙法蓮華経', '南無妙法蓮華経', '妙法蓮華教', '妙法蓮華教'],
         paginate: ['phrases'],
-        perCount: 1
+        perCount: 52
       }
     },
-    components: {
-      'Phrase': () => import('@/components/Phrase.vue'),
+    async asyncData({
+      req
+    }) {
+      const testJson = await getTestPhrases()
+      return {
+        testJson
+      }
+    },
+    mounted(){
+      this.phrases = this.testJson
     },
   }
 
