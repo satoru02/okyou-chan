@@ -3,9 +3,11 @@
     <!-- <Header /> -->
     <div class="column">
       <div class="txt">
-        <div class="px-6 pt-24 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in asects" :key="index">
+        <div class="mySlides px-6 pt-24 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
           {{ sect }} <span class="text-gray-600">・・・　お経の意味を下に書く</span>
         </div>
+        <button class="left" v-on:click="plusSlide(-1)">前</button>
+        <button class="right" v-on:click="plusSlide(+1)">次</button>
       </div>
     </div>
   </div>
@@ -22,8 +24,31 @@ export default {
   data(){
     return{
       sects: ['般若心経','方便品','自我夏','南無妙法蓮華経','妙法蓮華経','般若心経','方便品','自我夏','南無妙法蓮華経','妙法蓮華経'],
-      asects: ['般若心経']
+      slideIndex: 1,
+    }
+  },
+  mounted(){
+    this.showSlide(this.slideIndex)
+  },
+  methods: {
+    plusSlide(n){
+      this.showSlide(this.slideIndex += n)
+    },
+    showSlide(n){
+      var i;
+      var x = document.getElementsByClassName("mySlides");
 
+      if(n > x.length) {
+        this.slideIndex = 1
+      } else if (n < 1) {
+        this.slideIndex = x.length
+      };
+
+      for(let i = 0; i < x.length; i++){
+        x[i].style.display = "none"
+      };
+
+      x[this.slideIndex-1].style.display = "block"
     }
   }
 }
