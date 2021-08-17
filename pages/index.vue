@@ -1,15 +1,15 @@
 <template>
   <div class="row">
     <!-- <Header /> -->
+    <button id="prev" class="prev-drawer text-3xl" v-on:click="plusSlide(-1)">前</button>
     <div class="column">
       <div class="txt">
-        <div class="mySlides px-6 pt-24 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
+        <div class="mySlides pt-16 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
           {{ sect }} <span class="text-gray-600">・・・　お経の意味を下に書く</span>
         </div>
-        <button class="left" v-on:click="plusSlide(-1)">前</button>
-        <button class="right" v-on:click="plusSlide(+1)">次</button>
       </div>
     </div>
+     <button id="next" class="next-drawer text-3xl" v-on:click="plusSlide(+1)">次</button>
   </div>
 </template>
 
@@ -65,7 +65,7 @@ export default {
   .txt {
     width: 100%;
     height: auto;
-    font-size: 23px;
+    font-size: 26px;
     color: #333;
     position: relative;
     letter-spacing: .1em;
@@ -121,5 +121,41 @@ export default {
     line-height: 1em;
     transform: translateX(.8em);
     margin-left: .8em;
+  }
+
+  #prev {
+    left: 10px;
+  }
+
+  .prev-drawer {
+    position: absolute;
+    top: 0;
+    bottom: 70px;
+    width: 28px;
+    height: 70px;
+    margin: auto 0;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 20px 10px;
+    -webkit-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+  }
+
+  #next {
+    right: 10px;
+  }
+
+  .next-drawer {
+    position: absolute;
+    top: 0;
+    bottom: 70px;
+    width: 51px;
+    height: 70px;
+    margin: auto 0;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 20px 10px;
+    -webkit-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
   }
 </style>
