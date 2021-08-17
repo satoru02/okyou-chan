@@ -5,58 +5,74 @@
     <div class="column">
       <div class="txt">
         <div class="mySlides pt-16 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
-          {{ sect }} <span class="text-gray-600">・・・　お経の意味を下に書く</span>
+          {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
         </div>
       </div>
     </div>
-     <button id="next" class="next-drawer text-3xl" v-on:click="plusSlide(+1)">次</button>
+    <button id="next" class="next-drawer text-3xl" v-on:click="plusSlide(+1)">次</button>
+    <ul class="pagination">
+      <li v-for="(n,index) in this.sects.length" :key="index">
+        <a href="#">
+          <span :style="changeColor(n)"></span>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
-export default {
-  components: {
-    Header,
-    Footer
-  },
-  data(){
-    return{
-      sects: ['般若心経','方便品','自我夏','南無妙法蓮華経','妙法蓮華経','般若心経','方便品','自我夏','南無妙法蓮華経','妙法蓮華経'],
-      slideIndex: 1,
-    }
-  },
-  mounted(){
-    this.showSlide(this.slideIndex)
-  },
-  methods: {
-    plusSlide(n){
-      this.showSlide(this.slideIndex += n)
+  import Header from '@/components/Header.vue'
+  import Footer from '@/components/Footer.vue'
+  export default {
+    components: {
+      Header,
+      Footer
     },
-    showSlide(n){
-      var i;
-      var x = document.getElementsByClassName("mySlides");
+    data() {
+      return {
+        sects: ['般若心経', '方便品', '自我夏', '南無妙法蓮華経', '妙法蓮華経', '般若心経', '方便品', '自我夏', '南無妙法蓮華経', '妙法蓮華経'],
+        slideIndex: 1,
+      }
+    },
+    mounted() {
+      this.showSlide(this.slideIndex)
+    },
+    methods: {
+      plusSlide(n) {
+        this.showSlide(this.slideIndex += n)
+      },
+      showSlide(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
 
-      if(n > x.length) {
-        this.slideIndex = 1
-      } else if (n < 1) {
-        this.slideIndex = x.length
-      };
+        if (n > x.length) {
+          this.slideIndex = 1
+        } else if (n < 1) {
+          this.slideIndex = x.length
+        };
 
-      for(let i = 0; i < x.length; i++){
-        x[i].style.display = "none"
-      };
+        for (let i = 0; i < x.length; i++) {
+          x[i].style.display = "none"
+        };
 
-      x[this.slideIndex-1].style.display = "block"
+        x[this.slideIndex - 1].style.display = "block"
+      },
+      changeColor(slideNumber){
+        if(slideNumber === this.slideIndex){
+          return {
+            backgroundColor: '#00a8e8',
+            transform: 'scale(1)',
+            opacity: '1'
+          }
+        }
+      }
     }
   }
-}
+
 </script>
 
 <style lang="postcss">
   .column {
-    /* float: left; */
     width: 50%;
     padding: 10px;
     word-wrap: break-word;
@@ -158,4 +174,55 @@ export default {
     -webkit-transition: all 0.25s ease-in-out 0s;
     transition: all 0.25s ease-in-out 0s;
   }
+
+  .pagination {
+    width: 100%;
+    bottom: 7px;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: auto;
+    position: absolute;
+    font-size: 0;
+    height: 60px;
+    z-index: 10;
+    text-align: center;
+  }
+
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+
+  .pagination span {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #111;
+    border-radius: 100%;
+    opacity: 0.6;
+    pointer-events: none;
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+  }
+
+  .pagination li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pagination a {
+    display: block;
+    opacity: 0.6;
+    padding: 15px 7px;
+  }
+
 </style>
