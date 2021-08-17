@@ -23,6 +23,8 @@
 <script>
   import Header from '@/components/Header.vue'
   import Footer from '@/components/Footer.vue'
+  import anime from 'animejs';
+
   export default {
     components: {
       Header,
@@ -32,16 +34,46 @@
       return {
         sects: ['般若心経', '方便品', '自我夏', '南無妙法蓮華経', '妙法蓮華経', '般若心経', '方便品', '自我夏', '南無妙法蓮華経', '妙法蓮華経'],
         slideIndex: 1,
+        uniqueKey: 0,
       }
     },
     mounted() {
       this.showSlide(this.slideIndex)
+      this.animateText()
     },
     methods: {
+      animateText() {
+        var textWrapper = document.querySelector('.selection');
+
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+        anime.timeline({
+            loop: true
+          })
+          .add({
+            targets: '.selection .letter',
+            scale: [4, 1],
+            opacity: [0, 1],
+            translateZ: 0,
+            easing: "easeOutExpo",
+            duration: 950,
+            delay: (el, i) => 100 * i
+          }).add({
+            targets: '.selection',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1200
+          });
+      },
       plusSlide(n) {
         this.showSlide(this.slideIndex += n)
       },
       showSlide(n) {
+        var textWrapper = document.querySelector('.selection');
+        if(textWrapper != null) {
+          textWrapper.classList.remove("selection")
+        }
+
         var i;
         var x = document.getElementsByClassName("mySlides");
 
@@ -56,9 +88,11 @@
         };
 
         x[this.slideIndex - 1].style.display = "block"
+        x[this.slideIndex - 1].classList.add("selection")
+        this.animateText()
       },
-      changeColor(slideNumber){
-        if(slideNumber === this.slideIndex){
+      changeColor(slideNumber) {
+        if (slideNumber === this.slideIndex) {
           return {
             backgroundColor: '#00a8e8',
             transform: 'scale(1)',
