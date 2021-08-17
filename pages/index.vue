@@ -3,7 +3,7 @@
     <!-- <Header /> -->
     <button id="prev" class="prev-drawer text-3xl" v-on:click="plusSlide(-1)">前</button>
     <div class="column">
-      <div class="txt">
+      <div class="txt" @click="movePath()">
         <div class="mySlides pt-16 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
           {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
         </div>
@@ -99,6 +99,9 @@
             opacity: '1'
           }
         }
+      },
+      movePath(){
+        this.$router.replace(`/mantra/1`)
       }
     }
   }

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="column">
       <paginate name="phrases" :list="phrases" :per="perCount">
-        <div class="txt">
+        <div class="txt mt-5">
           <phrase v-for="(phrase, index) in paginated('phrases')" :key="index" :name="phrase.title" :pronounce="phrase.pronounce" />
         </div>
       </paginate>
@@ -10,6 +10,13 @@
     <footer>
       <paginate-links class="cursor-pointer" for="phrases" :show-step-links="true" />
     </footer>
+    <div class="column2"></div>
+    <div class="column3 mt-20">
+      <input-phrase v-model="typing" :phrases="phrases" v-on:store-typing="storeTyping"></input-phrase>
+    </div>
+    <div class="column4 mt-28">
+      <span class="txt" style="font-size: 30px;">妙法蓮華経方便品第十六</span>
+    </div>
   </div>
 </template>
 
@@ -19,12 +26,15 @@
   export default {
     components: {
       'Phrase': () => import('@/components/Phrase.vue'),
+      'inputPhrase': () => import('@/components/inputPhrase.vue')
     },
     data() {
       return {
         phrases: ['南無妙法蓮華経', '南無妙法蓮華経', '妙法蓮華教', '妙法蓮華教'],
         paginate: ['phrases'],
-        perCount: 52
+        perCount: 52,
+        typedPhrases: [],
+        typing: '',
       }
     },
     async asyncData({
@@ -38,6 +48,16 @@
     mounted(){
       this.phrases = this.testJson
     },
+    methods: {
+      storeTyping(value) {
+        if (value !== '') {
+          this.typedPhrases.push(value)
+          this.typing = ''
+        } else {
+          return false
+        }
+      },
+    }
   }
 
 </script>
@@ -60,7 +80,28 @@
   .column {
     float: left;
     width: 50%;
-    padding: 10px;
+    padding: 5px;
+    word-wrap: break-word;
+  }
+/* 
+  .column2 {
+    float: left;
+    width: 20%;
+    padding: 0px;
+    word-wrap: break-word;
+  } */
+
+  .column3 {
+    float: left;
+    width: 35%;
+    padding-left: 100px;
+    word-wrap: break-word;
+  }
+
+  .column4 {
+    float: left;
+    width: 5%;
+    padding-left: 30px;
     word-wrap: break-word;
   }
 
