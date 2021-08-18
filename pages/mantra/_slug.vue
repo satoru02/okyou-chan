@@ -183,17 +183,6 @@
     height: 100%;
   }
 
-  .meaning {
-    writing-mode: vertical-rl;
-    font-size: 20px;
-    padding-left: 180px;
-    position: absolute;
-  }
-
-  .meaning.h3 {
-    padding-left: 250px;
-  }
-
   ul {
     list-style-type: none;
     padding: 0;
@@ -251,24 +240,6 @@
 
   .phrase_section:hover {
     font-size: 20px;
-  }
-
-  .display-meaning-enter-active {
-    transition: all 3s ease;
-  }
-
-  .display-meaning-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-
-  .display-meaning-enter,
-  .display-meaning-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-
-  i {
-    margin-left: -30;
   }
 
   .type-input {
