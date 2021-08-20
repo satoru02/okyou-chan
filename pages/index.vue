@@ -1,23 +1,23 @@
 <template>
-  <div class="row">
-    <!-- <Header /> -->
-    <button id="prev" class="prev-drawer text-3xl" v-on:click="plusSlide(-1)">前</button>
-    <div class="column">
-      <div class="txt" @click="movePath()">
-        <div class="mySlides pt-16 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
-          {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
-        </div>
+<section>
+  <Header />
+  <button id="prev" class="prev-drawer text-3xl" v-on:click="plusSlide(-1)">前</button>
+  <div class="column">
+    <div class="txt" @click="movePath()">
+      <div class="mySlides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
+        {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
       </div>
     </div>
-    <button id="next" class="next-drawer text-3xl" v-on:click="plusSlide(+1)">次</button>
-    <ul class="pagination">
-      <li v-for="(n,index) in this.sects.length" :key="index">
-        <a href="#">
-          <span :style="changeColor(n)"></span>
-        </a>
-      </li>
-    </ul>
   </div>
+  <button id="next" class="next-drawer text-3xl" v-on:click="plusSlide(+1)">次</button>
+  <ul class="pagination">
+    <li v-for="(n,index) in this.sects.length" :key="index">
+      <a href="#">
+        <span :style="changeColor(n)"></span>
+      </a>
+    </li>
+  </ul>
+</section>
 </template>
 
 <script>
@@ -94,7 +94,7 @@
       changeColor(slideNumber) {
         if (slideNumber === this.slideIndex) {
           return {
-            backgroundColor: '#00a8e8',
+            backgroundColor: '#ffbe0b',
             transform: 'scale(1)',
             opacity: '1'
           }

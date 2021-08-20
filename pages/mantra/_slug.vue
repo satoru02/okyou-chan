@@ -1,33 +1,37 @@
 <template>
-  <div class="row">
-    <div class="column">
-      <paginate name="phrases" :list="phrases" :per="perCount">
-        <div class="txt mt-5">
-          <phrase v-for="(phrase, index) in paginated('phrases')"
-           :key="index" :name="phrase.title" :pronounce="phrase.pronounce"
-           :typing="typing" :store="typedPhrases"
-          />
-        </div>
-      </paginate>
+  <section>
+    <Header />
+    <div class="row">
+      <div class="column">
+        <paginate name="phrases" :list="phrases" :per="perCount">
+          <div class="txt mt-5">
+            <phrase v-for="(phrase, index) in paginated('phrases')"
+             :key="index" :name="phrase.title" :pronounce="phrase.pronounce"
+             :typing="typing" :store="typedPhrases"
+            />
+          </div>
+        </paginate>
+      </div>
+      <footer>
+        <paginate-links class="cursor-pointer" for="phrases" :show-step-links="true" />
+      </footer>
+      <div class="column2"></div>
+      <div class="column3 mt-20">
+        <input-phrase v-model="typing" :phrases="phrases" v-on:store-typing="storeTyping"></input-phrase>
+      </div>
+      <div class="column4 mt-28">
+        <span class="txt" style="font-size: 30px;">妙法蓮華経方便品第十六</span>
+      </div>
     </div>
-    <footer>
-      <paginate-links class="cursor-pointer" for="phrases" :show-step-links="true" />
-    </footer>
-    <div class="column2"></div>
-    <div class="column3 mt-20">
-      <input-phrase v-model="typing" :phrases="phrases" v-on:store-typing="storeTyping"></input-phrase>
-    </div>
-    <div class="column4 mt-28">
-      <span class="txt" style="font-size: 30px;">妙法蓮華経方便品第十六</span>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
   const getTestPhrases = () => import('@/static/testPhrase.json').then(j => j.default || j);
-
+  import Header from '@/components/Header.vue'
   export default {
     components: {
+      Header,
       'Phrase': () => import('@/components/Phrase.vue'),
       'inputPhrase': () => import('@/components/inputPhrase.vue')
     },
@@ -86,13 +90,6 @@
     padding: 5px;
     word-wrap: break-word;
   }
-/* 
-  .column2 {
-    float: left;
-    width: 20%;
-    padding: 0px;
-    word-wrap: break-word;
-  } */
 
   .column3 {
     float: left;
@@ -115,7 +112,7 @@
   }
 
   .row {
-    margin-top: -5px;
+    margin-top: -60px;
   }
 
   .txt {

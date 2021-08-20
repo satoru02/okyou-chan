@@ -1,70 +1,87 @@
 <template>
-<div class="header bg-gray-50">
-  <a href="#default" class="logo">打ち込み写経</a>
-  <div class="header-right">
+  <div class="header">
+    <div class="cursor-pointer pt-3">
+      <span @click="movePath()" class="logo">打ち込み写経
+        <!-- <span class="flex justify-end">Logo</span> -->
+      </span>
+      <div class="flex space-x-8 pt-3" v-if="this.$route.path === '/'">
+        <a class="text-gray-700">このサイトについて</a>
+        <a class="text-gray-700">利用規約</a>
+        <a class="text-gray-700">セキュリティポリシー</a>
+        <a class="sns-logo pt-5">
+        <BaseIcon icon-name="icon-menu-mark" :viewBox="'0 0 512 512'" :iconColor="'#000000'" :height="'25'"
+          :width="'25'">
+          <MenuIcon />
+        </BaseIcon>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-export default {
-  name: "Header"
-}
+  import BaseIcon from '../components/svg/BaseIcon.vue';
+  import MenuIcon from '../components/svg/MenuIcon.vue';
+
+  export default {
+    name: "Header",
+    components: {
+      BaseIcon,
+      MenuIcon
+    },
+    methods: {
+      movePath() {
+        this.$router.replace(`/`)
+      }
+    }
+  }
+
 </script>
 
 <style lang="postcss">
-* {box-sizing: border-box;}
-
-body {
-  margin: 0;
-  font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
-}
-
-.header {
-  overflow: hidden;
-  padding: 20px 10px;
-}
-
-.header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px; 
-  line-height: 25px;
-  border-radius: 4px;
-}
-
-.header a.logo {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.header a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
-
-.header-right {
-  float: right;
-}
-
-@media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
+  * {
+    box-sizing: border-box;
   }
-  
+
+  body {
+    margin: 0;
+    font-family: "YakuHanMP_Noto", "Noto Serif JP", serif;
+  }
+
+  .header {
+    overflow: hidden;
+    /* padding: 10px 10px; */
+    padding-left: 20px;
+  }
+
+  .header .logo {
+    font-size: 23px;
+    /* font-weight: bold; */
+  }
+
+  .sns-logo {
+    position: absolute;
+    line-height: 60px;
+    right: 25px;
+    top: 0;
+    height: 60px;
+    z-index: 100;
+  }
+
   .header-right {
-    float: none;
+    float: right;
   }
-}
+
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+
+    .header-right {
+      float: none;
+    }
+  }
 
 </style>
