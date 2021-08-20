@@ -3,7 +3,10 @@
     <div class="column">
       <paginate name="phrases" :list="phrases" :per="perCount">
         <div class="txt mt-5">
-          <phrase v-for="(phrase, index) in paginated('phrases')" :key="index" :name="phrase.title" :pronounce="phrase.pronounce" />
+          <phrase v-for="(phrase, index) in paginated('phrases')"
+           :key="index" :name="phrase.title" :pronounce="phrase.pronounce"
+           :typing="typing" :store="typedPhrases"
+          />
         </div>
       </paginate>
     </div>
