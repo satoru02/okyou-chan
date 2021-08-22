@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '打ち込み写経 | 写経が出来るWebサービス',
+    title: '打ち込み写経 | 心を鎮める写経アプリ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
