@@ -2,14 +2,14 @@
   <div class="header">
     <div class="cursor-pointer pt-3">
       <span @click="movePath()" class="logo">打ち込み写経
-        <!-- <span class="flex justify-end">Logo</span> -->
       </span>
-      <div class="flex space-x-8 pt-3" v-if="this.$route.path === '/'">
-        <a class="text-gray-700">このサイトについて</a>
-        <a class="text-gray-700">利用規約</a>
-        <a class="text-gray-700">セキュリティポリシー</a>
-        <a class="sns-logo pt-5">
-        <BaseIcon icon-name="icon-menu-mark" :viewBox="'0 0 512 512'" :iconColor="'#000000'" :height="'25'"
+      <div class="flex space-x-8 text-sm pt-3" v-if="this.$route.path === '/'">
+        <a class="text-gray-500">このサイトについて</a>
+        <a class="text-gray-500">利用規約</a>
+        <a class="text-gray-500">セキュリティポリシー</a>
+        <a class="text-gray-500">お問い合わせ</a>
+        <a class="sns-logo pt-4">
+        <BaseIcon icon-name="icon-menu-mark" :viewBox="'0 0 512 512'" :iconColor="'#111111'" :height="'25'"
           :width="'25'">
           <MenuIcon />
         </BaseIcon>

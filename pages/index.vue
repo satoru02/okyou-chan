@@ -1,34 +1,67 @@
 <template>
-<section>
-  <Header />
-  <button id="prev" class="prev-drawer text-3xl" v-on:click="plusSlide(-1)">前</button>
-  <div class="column">
-    <div class="txt" @click="movePath()">
-      <div class="mySlides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
-        {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
+  <section>
+    <Header />
+
+    <button id="prev" class="prev-drawer text-2xl text-gray-600" v-on:click="plusSlide(-1)">前</button>
+
+    <div class="column">
+      <div class="txt" @click="movePath()">
+        <div class="mySlides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
+          {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
+        </div>
       </div>
     </div>
-  </div>
-  <button id="next" class="next-drawer text-3xl" v-on:click="plusSlide(+1)">次</button>
-  <ul class="pagination">
-    <li v-for="(n,index) in this.sects.length" :key="index">
-      <a href="#">
-        <span :style="changeColor(n)"></span>
-      </a>
-    </li>
-  </ul>
-</section>
+
+    <button id="next" class="next-drawer text-2xl text-gray-600" v-on:click="plusSlide(+1)">次</button>
+
+    <div class="profile-link text-sm text-gray-600">Copyright ©2021 打ち込み写経</div>
+    <ul class="pagination">
+      <li v-for="(n,index) in this.sects.length" :key="index">
+        <a href="#">
+          <span :style="changeColor(n)"></span>
+        </a>
+      </li>
+    </ul>
+    <div class="sns-link text-sm text-gray-600">
+      <ul>
+        <li>
+          <BaseIcon icon-name="icon-theater-mark" :viewBox="'0 0 112.197 112.197'" :height="'40'" :width="'40'">
+            <Twitter />
+          </BaseIcon>
+        </li>
+        <li>
+          <BaseIcon icon-name="icon-theater-mark" :viewBox="'0 0 112.196 112.196'" :height="'40'" :width="'40'">
+            <Facebook />
+          </BaseIcon>
+        </li>
+        <li>
+          <BaseIcon icon-name="icon-theater-mark" :viewBox="'0 0 512 512'" :height="'40'" :width="'40'">
+            <LineIcon />
+          </BaseIcon>
+        </li>
+      </ul>
+    </div>
+  </section>
 </template>
 
 <script>
   import Header from '@/components/Header.vue'
   import Footer from '@/components/Footer.vue'
+  import BaseIcon from '@/components/svg/BaseIcon.vue'
+  import Twitter from '@/components/svg/Twitter.vue'
+  import Facebook from '@/components/svg/Facebook.vue'
+  import LineIcon from '@/components/svg/Line.vue'
+
   import anime from 'animejs';
 
   export default {
     components: {
       Header,
-      Footer
+      Footer,
+      BaseIcon,
+      Twitter,
+      Facebook,
+      LineIcon
     },
     data() {
       return {
@@ -44,7 +77,6 @@
     methods: {
       animateText() {
         var textWrapper = document.querySelector('.selection');
-
         textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
         anime.timeline({
             loop: true
@@ -70,7 +102,7 @@
       },
       showSlide(n) {
         var textWrapper = document.querySelector('.selection');
-        if(textWrapper != null) {
+        if (textWrapper != null) {
           textWrapper.classList.remove("selection")
         }
 
@@ -94,13 +126,13 @@
       changeColor(slideNumber) {
         if (slideNumber === this.slideIndex) {
           return {
-            backgroundColor: '#ffbe0b',
+            backgroundColor: '#000000',
             transform: 'scale(1)',
             opacity: '1'
           }
         }
       },
-      movePath(){
+      movePath() {
         this.$router.replace(`/mantra/1`)
       }
     }
@@ -222,11 +254,12 @@
     position: absolute;
     font-size: 0;
     height: 60px;
-    z-index: 10;
+    /* z-index: 10; */
     text-align: center;
   }
 
   ul {
+    width: 100%;
     display: block;
     list-style-type: disc;
     margin-block-start: 1em;
@@ -242,7 +275,7 @@
     height: 15px;
     background-color: #111;
     border-radius: 100%;
-    opacity: 0.6;
+    opacity: 0.2;
     pointer-events: none;
     -webkit-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
@@ -250,7 +283,7 @@
     transform: scale(0.6);
   }
 
-  .pagination li {
+  li {
     display: inline-block;
     margin: 0;
     padding: 0;
@@ -260,6 +293,30 @@
     display: block;
     opacity: 0.6;
     padding: 15px 7px;
+  }
+
+  .profile-link {
+    position: absolute;
+    left: 15px;
+    bottom: 7px;
+    height: 45px;
+    /* padding-left: 15px; */
+    background-size: 50px 50px;
+    z-index: 100;
+  }
+
+  .sns-link {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    height: 75px;
+    padding-right: 25px;
+    background-size: 50px 50px;
+    z-index: 100;
+  }
+
+  .sns-link li {
+    padding-left: 35px;
   }
 
 </style>
