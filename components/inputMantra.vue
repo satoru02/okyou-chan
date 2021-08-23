@@ -15,9 +15,9 @@
 
 <script>
   export default {
-    name: 'inputPhrase',
+    name: 'inputMantra',
     props: {
-      phrases: {
+      mantras: {
         type: Array,
         required: true
       },
@@ -33,8 +33,8 @@
       }
     },
     methods: {
-      checkTyping: function (phrase) {
-        let output = this.phrases.filter(aphrase => ((phrase === aphrase.title) || (phrase === aphrase.pronounce)))
+      checkTyping: function (mantra) {
+        let output = this.mantras.filter(aMantra => ((mantra === aMantra.title) || (mantra === aMantra.pronounce)))
         if (output.length > 1) {
           this.meaning = "妙法蓮華経に帰依します。妙法蓮華経に帰依します。妙法蓮華経に"
         }

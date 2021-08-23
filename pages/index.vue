@@ -5,9 +5,9 @@
     <button id="prev" class="prev-drawer text-2xl text-gray-600" v-on:click="plusSlide(-1)">前</button>
 
     <div class="column">
-      <div class="txt" @click="movePath()">
-        <div class="mySlides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sect, index) in sects" :key="index">
-          {{ sect }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
+      <div class="txt">
+        <div @click="movePath(sutra)" class="mySlides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
+          {{ sutra["name"] }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
 
     <div class="profile-link text-sm text-gray-600">Copyright ©2021 打ち込み写経</div>
     <ul class="pagination">
-      <li v-for="(n,index) in this.sects.length" :key="index">
+      <li v-for="(n,index) in this.sutras.length" :key="index">
         <a href="#">
           <span :style="changeColor(n)"></span>
         </a>
@@ -51,8 +51,9 @@
   import Twitter from '@/components/svg/Twitter.vue'
   import Facebook from '@/components/svg/Facebook.vue'
   import LineIcon from '@/components/svg/Line.vue'
-
   import anime from 'animejs';
+
+  const getSutras = () => import('../static/sutras.json').then(j => j.default || j);
 
   export default {
     components: {
@@ -63,9 +64,14 @@
       Facebook,
       LineIcon
     },
+    async asyncData({req}){
+      const sutras = await getSutras()
+      return {
+        sutras
+      }
+    },
     data() {
       return {
-        sects: ['般若心経', '方便品', '自我夏', '南無妙法蓮華経', '妙法蓮華経', '般若心経', '方便品', '自我夏', '南無妙法蓮華経', '妙法蓮華経'],
         slideIndex: 1,
         uniqueKey: 0,
       }
@@ -132,8 +138,8 @@
           }
         }
       },
-      movePath() {
-        this.$router.replace(`/mantra/1`)
+      movePath(sutra) {
+        this.$router.push(`/sutras/${sutra["name"]}`)
       }
     }
   }

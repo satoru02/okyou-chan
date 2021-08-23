@@ -3,21 +3,21 @@
     <Header />
     <div class="row">
       <div class="column">
-        <paginate name="phrases" :list="phrases" :per="perCount">
+        <paginate name="mantras" :list="mantras" :per="perCount">
           <div class="txt mt-5">
-            <phrase v-for="(phrase, index) in paginated('phrases')"
-             :key="index" :name="phrase.title" :pronounce="phrase.pronounce"
-             :typing="typing" :store="typedPhrases"
+            <mantra v-for="(mantra, index) in paginated('mantras')"
+             :key="index" :name="mantra.name" :pronounce="mantra.pronounce"
+             :typing="typing" :store="typedMantras"
             />
           </div>
         </paginate>
       </div>
       <footer>
-        <paginate-links class="cursor-pointer" for="phrases" :show-step-links="true" />
+        <paginate-links class="cursor-pointer" for="mantras" :show-step-links="true" />
       </footer>
       <div class="column2"></div>
       <div class="column3 mt-20">
-        <input-phrase v-model="typing" :phrases="phrases" v-on:store-typing="storeTyping"></input-phrase>
+        <input-mantra v-model="typing" :mantras="mantras" v-on:store-typing="storeTyping"></input-mantra>
       </div>
       <div class="column4 mt-28">
         <span class="txt" style="font-size: 30px;">妙法蓮華経方便品第十六</span>
@@ -27,38 +27,38 @@
 </template>
 
 <script>
-  const getTestPhrases = () => import('@/static/testPhrase.json').then(j => j.default || j);
   import Header from '@/components/Header.vue'
   export default {
     components: {
       Header,
-      'Phrase': () => import('@/components/Phrase.vue'),
-      'inputPhrase': () => import('@/components/inputPhrase.vue')
+      'Mantra': () => import('@/components/Mantra.vue'),
+      'inputMantra': () => import('@/components/inputMantra.vue')
     },
     data() {
       return {
-        phrases: ['南無妙法蓮華経', '南無妙法蓮華経', '妙法蓮華教', '妙法蓮華教'],
-        paginate: ['phrases'],
+        endpoint: process.env.API_GATEWAY,
+        mantras: ['南無妙法蓮華経', '南無妙法蓮華経', '妙法蓮華教', '妙法蓮華教'],
+        paginate: ['mantras'],
         perCount: 52,
-        typedPhrases: [],
+        typedMantras: [],
         typing: '',
       }
     },
-    async asyncData({
-      req
-    }) {
-      const testJson = await getTestPhrases()
-      return {
-        testJson
-      }
-    },
     mounted(){
-      this.phrases = this.testJson
+      this.getSutras()
     },
     methods: {
+      async getSutras(){
+        await this.$axios.get(this.endpoint + `${this.$nuxt.$route.params.slug}`)
+        .then(res => this.fetchSuccessful(res))
+        .catch(err => console.log(err))
+      },
+      fetchSuccessful(res){
+        this.mantras = res.data.mantras
+      },
       storeTyping(value) {
         if (value !== '') {
-          this.typedPhrases.push(value)
+          this.typedMantras.push(value)
           this.typing = ''
         } else {
           return false
@@ -206,7 +206,7 @@
     writing-mode: horizontal-tb;
   }
 
-  .paginate-links.phrases {
+  .paginate-links.mantras {
     user-select: none;
 
     a {
@@ -230,7 +230,7 @@
     }
   }
 
-  .phrase_section {
+  .mantra_section {
     font-size: 17px;
     transition-property: font-size;
     transition-duration: 2s;
@@ -238,7 +238,7 @@
     transition-delay: 1s;
   }
 
-  .phrase_section:hover {
+  .mantra_section:hover {
     font-size: 20px;
   }
 

@@ -1,6 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  ssr: 'false',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -20,9 +21,15 @@ export default {
   css: [
   ],
 
+  env: {
+    API_TOKEN: process.env.API_TOKEN,
+    API_GATEWAY: process.env.API_GATEWAY,
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/vue-pagination.js',
+    '~/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +52,10 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:3000',
+    credentials: false,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
