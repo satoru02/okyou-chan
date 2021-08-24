@@ -47,7 +47,12 @@
     },
     methods: {
       async getSutras() {
-        await this.$axios.get(this.endpoint + `${this.$nuxt.$route.params.slug}`)
+        let config = {
+          headers: {
+            authorizationToken: "allow"
+          }
+        }
+        await this.$axios.get(this.endpoint + `${this.$nuxt.$route.params.slug}`, config)
           .then(res => this.fetchSuccessful(res))
           .catch(err => console.log(err))
       },
