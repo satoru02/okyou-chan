@@ -1,19 +1,15 @@
 <template>
   <section>
     <Header />
-
-    <button id="prev" class="prev-drawer text-2xl text-gray-600" v-on:click="plusSlide(-1)">前</button>
-
+    <button id="prev" class="prev-drawer text-2xl text-gray-600" @click="plusSlide(-1)">前</button>
     <div class="column">
       <div class="txt">
-        <div @click="movePath(sutra)" class="mySlides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
+        <div @click="movePath(sutra)" class="slides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
           {{ sutra["name"] }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
         </div>
       </div>
     </div>
-
-    <button id="next" class="next-drawer text-2xl text-gray-600" v-on:click="plusSlide(+1)">次</button>
-
+    <button id="next" class="next-drawer text-2xl text-gray-600" @click="plusSlide(+1)">次</button>
     <div class="profile-link text-sm text-gray-600">Copyright ©2021 打ち込み写経</div>
     <ul class="pagination">
       <li v-for="(n,index) in this.sutras.length" :key="index">
@@ -113,7 +109,7 @@
         }
 
         var i;
-        var x = document.getElementsByClassName("mySlides");
+        var x = document.getElementsByClassName("slides");
 
         if (n > x.length) {
           this.slideIndex = 1
@@ -171,49 +167,6 @@
     columns: 10px 1;
   }
 
-  .txt::before {
-    content: '';
-    position: sticky;
-    width: 100%;
-    height: 100%;
-    background-image:
-      linear-gradient(to left, rgba(0, 0, 0, .2) 1px, transparent 0),
-      linear-gradient(to bottom, rgba(0, 0, 0, .2) 1px, transparent 0),
-      linear-gradient(to left, transparent 11px, rgba(0, 0, 0, .2) 12px, transparent 0);
-    background-size: 2em 1.5em;
-    background-position: top right;
-    background-origin: padding-box;
-    margin-right: -5px;
-    z-index: -1;
-  }
-
-  .txt::after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-
-  .txt p {
-    margin: 0;
-    margin-top: 0em;
-    font-size: 17px;
-    margin-right: 10;
-  }
-
-  .txt ruby {
-    ruby-align: left;
-    font-size: 1px;
-  }
-
-  .txt ruby>rt {
-    font-size: 10px;
-    letter-spacing: 0;
-    text-align: justify;
-    line-height: 1em;
-    transform: translateX(.8em);
-    margin-left: .8em;
-  }
-
   #prev {
     left: 10px;
   }
@@ -222,14 +175,11 @@
     position: absolute;
     top: 0;
     bottom: 70px;
-    width: 28px;
+    width: 38px;
     height: 70px;
     margin: auto 0;
-    z-index: 1000;
     cursor: pointer;
     padding: 20px 10px;
-    -webkit-transition: all 0.25s ease-in-out 0s;
-    transition: all 0.25s ease-in-out 0s;
   }
 
   #next {
@@ -243,11 +193,8 @@
     width: 51px;
     height: 70px;
     margin: auto 0;
-    z-index: 1000;
     cursor: pointer;
     padding: 20px 10px;
-    -webkit-transition: all 0.25s ease-in-out 0s;
-    transition: all 0.25s ease-in-out 0s;
   }
 
   .pagination {
@@ -258,9 +205,7 @@
     padding: 0;
     margin: auto;
     position: absolute;
-    font-size: 0;
     height: 60px;
-    /* z-index: 10; */
     text-align: center;
   }
 
@@ -306,9 +251,7 @@
     left: 15px;
     bottom: 7px;
     height: 45px;
-    /* padding-left: 15px; */
     background-size: 50px 50px;
-    z-index: 100;
   }
 
   .sns-link {
@@ -318,7 +261,6 @@
     height: 75px;
     padding-right: 25px;
     background-size: 50px 50px;
-    z-index: 100;
   }
 
   .sns-link li {
