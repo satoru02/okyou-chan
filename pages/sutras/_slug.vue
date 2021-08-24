@@ -5,10 +5,8 @@
       <div class="column">
         <paginate name="mantras" :list="mantras" :per="perCount">
           <div class="txt mt-5">
-            <mantra v-for="(mantra, index) in paginated('mantras')"
-             :key="index" :name="mantra.name" :pronounce="mantra.pronounce"
-             :typing="typing" :store="typedMantras"
-            />
+            <mantra v-for="(mantra, index) in paginated('mantras')" :key="index" :name="mantra.name"
+              :pronounce="mantra.pronounce" :typing="typing" :store="typedMantras" />
           </div>
         </paginate>
       </div>
@@ -20,7 +18,7 @@
         <input-mantra v-model="typing" :mantras="mantras" v-on:store-typing="storeTyping"></input-mantra>
       </div>
       <div class="column4 mt-28">
-        <span class="txt" style="font-size: 30px;">妙法蓮華経方便品第十六</span>
+        <span class="txt" style="font-size: 30px;">{{this.$nuxt.$route.params.slug}}</span>
       </div>
     </div>
   </section>
@@ -37,23 +35,23 @@
     data() {
       return {
         endpoint: process.env.API_GATEWAY,
-        mantras: ['南無妙法蓮華経', '南無妙法蓮華経', '妙法蓮華教', '妙法蓮華教'],
+        mantras: [],
         paginate: ['mantras'],
         perCount: 52,
         typedMantras: [],
         typing: '',
       }
     },
-    mounted(){
+    mounted() {
       this.getSutras()
     },
     methods: {
-      async getSutras(){
+      async getSutras() {
         await this.$axios.get(this.endpoint + `${this.$nuxt.$route.params.slug}`)
-        .then(res => this.fetchSuccessful(res))
-        .catch(err => console.log(err))
+          .then(res => this.fetchSuccessful(res))
+          .catch(err => console.log(err))
       },
-      fetchSuccessful(res){
+      fetchSuccessful(res) {
         this.mantras = res.data.mantras
       },
       storeTyping(value) {
