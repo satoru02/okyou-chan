@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header />
-    <button id="prev" class="prev-drawer text-2xl text-gray-600" @click="plusSlide(-1)">前</button>
+    <button id="prev" class="prev-drawer hover:text-black text-2xl text-gray-600" @click="plusSlide(-1)">前</button>
     <div class="column">
       <div class="txt">
         <div @click="movePath(sutra)" class="slides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
@@ -9,8 +9,8 @@
         </div>
       </div>
     </div>
-    <button id="next" class="next-drawer text-2xl text-gray-600" @click="plusSlide(+1)">次</button>
-    <div class="profile-link text-sm text-gray-600">Copyright ©2021 打ち込み写経</div>
+    <button id="next" class="next-drawer hover:text-black text-2xl text-gray-600" @click="plusSlide(+1)">次</button>
+    <div class="profile-link text-sm text-gray-600">©2021 打ち込み写経</div>
     <ul class="pagination">
       <li v-for="(n,index) in this.sutras.length" :key="index">
         <a href="#">
@@ -21,17 +21,17 @@
     <div class="sns-link text-sm text-gray-600">
       <ul>
         <li>
-          <BaseIcon icon-name="icon-theater-mark" :viewBox="'0 0 112.197 112.197'" :height="'40'" :width="'40'">
+          <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.197 112.197'" :height="'40'" :width="'40'">
             <Twitter />
           </BaseIcon>
         </li>
         <li>
-          <BaseIcon icon-name="icon-theater-mark" :viewBox="'0 0 112.196 112.196'" :height="'40'" :width="'40'">
+          <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.196 112.196'" :height="'40'" :width="'40'">
             <Facebook />
           </BaseIcon>
         </li>
         <li>
-          <BaseIcon icon-name="icon-theater-mark" :viewBox="'0 0 512 512'" :height="'40'" :width="'40'">
+          <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 512 512'" :height="'40'" :width="'40'">
             <LineIcon />
           </BaseIcon>
         </li>
@@ -182,6 +182,13 @@
     padding: 20px 10px;
   }
 
+  .prev-drawer:hover {
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
   #next {
     right: 10px;
   }
@@ -195,6 +202,13 @@
     margin: auto 0;
     cursor: pointer;
     padding: 20px 10px;
+  }
+
+  .next-drawer:hover {
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
   }
 
   .pagination {
@@ -265,6 +279,13 @@
 
   .sns-link li {
     padding-left: 35px;
+  }
+
+  .sns-link li:hover {
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
   }
 
 </style>

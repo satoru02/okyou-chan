@@ -1,14 +1,14 @@
 <template>
   <div class="header">
     <div class="cursor-pointer pt-3">
-      <span @click="movePath()" class="logo">
+      <span class="logo" @click="movePath()">
         打ち込み写経
       </span>
       <div class="flex space-x-8 text-sm pt-3 text-gray-500" v-if="this.$route.path === '/'">
-        <a>このサイトについて</a>
-        <a>利用規約</a>
-        <a>セキュリティポリシー</a>
-        <a>お問い合わせ</a>
+        <a class="hover:text-black" @click="openModal('about')">このサイトについて</a>
+        <a class="hover:text-black" @click="openModal('rule')">利用規約</a>
+        <a class="hover:text-black" @click="openModal('policy')">セキュリティポリシー</a>
+        <a class="hover:text-black">お問い合わせ</a>
         <a class="menu-bar pt-4">
           <BaseIcon icon-name="icon-menu-mark" :viewBox="'0 0 512 512'" :iconColor="'#111111'" :height="'25'"
             :width="'25'">
@@ -16,6 +16,7 @@
           </BaseIcon>
         </a>
       </div>
+      <HeaderModal :name="modalName" />
     </div>
   </div>
 </template>
@@ -26,13 +27,23 @@
 
   export default {
     name: "Header",
+    data() {
+      return {
+        modalName: ""
+      }
+    },
     components: {
       BaseIcon,
-      MenuIcon
+      MenuIcon,
+      'HeaderModal': () => import('./HeaderModal.vue'),
     },
     methods: {
-      movePath() {
+      movePath(){
         this.$router.replace(`/`)
+      },
+      openModal(modal){
+         this.modalName = modal
+         this.$modal.show(modal);
       }
     }
   }
