@@ -8,7 +8,7 @@
         <a class="hover:text-black" @click="openModal('about')">このサイトについて</a>
         <a class="hover:text-black" @click="openModal('rule')">利用規約</a>
         <a class="hover:text-black" @click="openModal('policy')">セキュリティポリシー</a>
-        <a class="hover:text-black">お問い合わせ</a>
+        <a class="hover:text-black" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScOAq6o51skDe81OniSUANtxsf9nJKnuityLZNvKeURk17vXQ/viewform?usp=sf_link">お問い合わせ</a>
         <a class="menu-bar pt-4">
           <BaseIcon icon-name="icon-menu-mark" :viewBox="'0 0 512 512'" :iconColor="'#111111'" :height="'25'"
             :width="'25'">
@@ -44,7 +44,7 @@
       openModal(modal){
          this.modalName = modal
          this.$modal.show(modal);
-      }
+      },
     }
   }
 
