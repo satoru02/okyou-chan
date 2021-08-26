@@ -2,7 +2,7 @@
   <div class="header">
     <div class="cursor-pointer pt-3">
       <span class="logo" @click="movePath()">
-        打ち込み写経
+        お経ちゃん
       </span>
       <div class="flex space-x-8 text-sm pt-3 text-gray-500" v-if="this.$route.path === '/'">
         <a class="hover:text-black" @click="openModal('about')">このサイトについて</a>
@@ -29,7 +29,7 @@
     name: "Header",
     data() {
       return {
-        modalName: ""
+        modalName: "",
       }
     },
     components: {

@@ -63,7 +63,7 @@
     async asyncData({req}){
       const sutras = await getSutras()
       return {
-        sutras
+        sutras,
       }
     },
     data() {
