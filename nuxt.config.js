@@ -1,74 +1,66 @@
 export default {
-  // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   ssr: 'false',
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'お経ちゃん | 心を鎮める写経アプリ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'twitter:card', property:'twitter:card', content: 'summary_large_image'},
+      { hid: 'twitter:url', property: 'twitter:card', content: 'https://okyou-chan.com'},
+      { hid: 'twitter:site', property: 'twitter:site', content: '@okyouchan'},
+      { hid: 'twitter:creator', property: 'twitter:creator', content: '@okyouchan'},
+      { hid: 'twitter:description', property: 'twitter:description', content: '主に仏教宗派で使われる様々なお経をタイピング操作で写経する事が出来ます。今後、写経できるお経は随時追加される予定です。'},
+      { hid: 'twitter:title', property: 'twitter:title', content: 'お経ちゃん'},
+      { hid: 'twitter:image', property: 'twitter:image', content: ''},
+      { hid: 'og:url', property: 'og:url', content: 'https://okyou-chan.com'},
+      { hid: 'og:type', property: 'og:type', content: 'website'},
+      { hid: 'og:site_name', property: 'og:site_name', content: 'お経ちゃん'},
+      { hid: 'og:description', property: 'og:description', content: '主に仏教宗派で使われる様々なお経をタイピング操作で写経する事が出来ます。今後、写経できるお経は随時追加される予定です。'},
+      { hid: 'og:image', property: 'og:image', content: ''},
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
-
   env: {
     API_TOKEN: process.env.API_TOKEN,
     API_GATEWAY: process.env.API_GATEWAY,
   },
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/vue-pagination.js',
     '~/plugins/axios',
     '~plugins/vue-js-modal.js'
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    // https://go.nuxtjs.dev/content
     '@nuxt/content',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'http://localhost:3000',
     credentials: false,
   },
 
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
       lang: 'ja'
     }
   },
-
-  // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel:{
       plugins: [

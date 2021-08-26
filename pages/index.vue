@@ -21,19 +21,25 @@
     <div class="sns-link text-sm text-gray-600">
       <ul>
         <li>
-          <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.197 112.197'" :height="'40'" :width="'40'">
-            <Twitter />
-          </BaseIcon>
+          <a target="_blank" :href="`https://twitter.com/intent/tweet?&text=お経ちゃん - 心を鎮める写経アプリ&hashtags=お経ちゃん&url=https://okyou-chan.com`">
+            <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.197 112.197'" :height="'40'" :width="'40'">
+              <Twitter />
+            </BaseIcon>
+          </a>
         </li>
         <li>
-          <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.196 112.196'" :height="'40'" :width="'40'">
-            <Facebook />
-          </BaseIcon>
+          <a target="_blank" :href="'https://www.facebook.com/sharer.php?u=https://okyou-chan.com&t=お経ちゃん'">
+            <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.196 112.196'" :height="'40'" :width="'40'">
+              <Facebook />
+            </BaseIcon>
+          </a>
         </li>
         <li>
-          <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 512 512'" :height="'40'" :width="'40'">
-            <LineIcon />
-          </BaseIcon>
+          <a target="_blank" :href="''">
+            <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 512 512'" :height="'40'" :width="'40'">
+              <LineIcon />
+            </BaseIcon>
+          </a>
         </li>
       </ul>
     </div>
