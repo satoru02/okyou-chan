@@ -1,15 +1,19 @@
 <script>
   const getRules = () => import('../static/rule.json').then(j => j.default || j);
+  const getPolicies = () => import('../static/policy.json').then(j => j.default || j);
 
   export default {
     name: "HeaderModal",
     async created() {
       this.rules = await getRules()
+      this.policies = await getPolicies()
     },
     async asyncData() {
       const rules = await getRules()
+      const policies = await getPolicies()
       return {
-        rules
+        rules,
+        policies
       }
     },
     props: {
@@ -22,23 +26,29 @@
       return {
         modalHeader: '',
         modalText: '',
-        rules: []
+        rules: [],
+        policies: [],
+        domContent: []
       }
     },
     render: function (createElement) {
-
       this.setContent()
-      let ruleNode = ''
+      let textNode = ''
 
       if (this.name === 'rule') {
-        ruleNode = createElement('div', {
+        this.domContent = this.rules
+      } else if (this.name === 'policy') {
+        this.domContent = this.policies
+      }
+
+      if ((this.name === 'rule') || (this.name === 'policy')) {
+        textNode = createElement('div', {
             style: {
               padding: '15px'
             }
           },
-          this.rules.map((rule) => {
+          this.domContent.map((rule) => {
             if (typeof rule.article === "object") {
-
               return createElement('p', {
                 style: {
                   paddingBottom: "20px"
@@ -61,6 +71,18 @@
               }, rule.article)
             }
           })
+        )
+      } else {
+        textNode = createElement(
+          'div', {
+            style: {
+              paddingLeft: '15px',
+              paddingBottom: '15px'
+            },
+            domProps: {
+              innerHTML: this.modalText
+            },
+          }
         )
       }
 
@@ -85,18 +107,7 @@
               }
             }
           ),
-          createElement(
-            'div', {
-              style: {
-                paddingLeft: '15px',
-                paddingBottom: '15px'
-              },
-              domProps: {
-                innerHTML: this.modalText
-              },
-            }
-          ),
-          ruleNode
+          textNode
         ]
       )
     },
@@ -117,8 +128,7 @@
         }
         break;
         }
-      },
+      }
     }
   }
-
 </script>
