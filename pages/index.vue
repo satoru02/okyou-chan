@@ -1,40 +1,53 @@
 <template>
   <section>
     <Header />
-    <button id="prev" class="prev-drawer hover:text-black text-2xl text-gray-600" @click="plusSlide(-1)">前</button>
-    <div class="column">
-      <div class="txt">
-        <div @click="movePath(sutra)" class="slides -mt-5 text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
+    <SecondHeader v-if="this.$route.path === '/'" />
+
+    <div class="grid grid-cols-3">
+      <div class="pt-64 flex justify-start pl-6">
+        <div class="cursor-pointer hover:text-black text-2xl text-gray-600" @click="plusSlide(-1)">
+          前
+        </div>
+      </div>
+      <div class="flex justify-center items-center pt-10">
+        <div @click="movePath(sutra)" class="txt slides text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
           {{ sutra["name"] }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
         </div>
       </div>
+      <div class="pt-64 flex justify-end pr-6">
+        <div class="cursor-pointer hover:text-black text-2xl text-gray-600" @click="plusSlide(+1)">
+          次
+        </div>
+      </div>
     </div>
-    <button id="next" class="next-drawer hover:text-black text-2xl text-gray-600" @click="plusSlide(+1)">次</button>
-    <div class="profile-link text-sm text-gray-600">©2021 打ち込み写経</div>
-    <ul class="pagination">
-      <li v-for="(n,index) in this.sutras.length" :key="index">
-        <a href="#">
-          <span :style="changeColor(n)"></span>
-        </a>
-      </li>
-    </ul>
-    <div class="sns-link text-sm text-gray-600">
-      <ul>
-        <li>
+
+    <div class="grid md:grid-cols-3 grid-cols-1 absolute inset-x-0 bottom-0">
+      <div class="hidden md:block text-base pt-2 md:pl-6 text-gray-600 flex justify-center md:justify-start">
+        ©2021 打ち込み写経
+      </div>
+      <ul class="pagination flex justify-center mb-6 md:mb-0">
+        <li v-for="(n,index) in this.sutras.length" :key="index">
+          <a href="#">
+            <span :style="changeColor(n)"></span>
+          </a>
+        </li>
+      </ul>
+      <ul class="sns-link flex flex-row-reverse md:pr-3 flex justify-center md:justify-start">
+        <li class="px-3">
           <a target="_blank" :href="`https://twitter.com/intent/tweet?&text=お経ちゃん - 心を鎮める写経アプリ&hashtags=お経ちゃん&url=https://okyou-chan.com`">
             <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.197 112.197'" :height="'40'" :width="'40'">
               <Twitter />
             </BaseIcon>
           </a>
         </li>
-        <li>
+        <li class="px-3">
           <a target="_blank" :href="'https://www.facebook.com/sharer.php?u=https://okyou-chan.com&t=お経ちゃん'">
             <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 112.196 112.196'" :height="'40'" :width="'40'">
               <Facebook />
             </BaseIcon>
           </a>
         </li>
-        <li>
+        <li class="px-3">
           <a target="_blank" :href="''">
             <BaseIcon class="cursor-pointer" icon-name="icon-theater-mark" :viewBox="'0 0 512 512'" :height="'40'" :width="'40'">
               <LineIcon />
@@ -48,6 +61,7 @@
 
 <script>
   import Header from '@/components/Header.vue'
+  import SecondHeader from '@/components/SecondHeader.vue'
   import Footer from '@/components/Footer.vue'
   import BaseIcon from '@/components/svg/BaseIcon.vue'
   import Twitter from '@/components/svg/Twitter.vue'
@@ -60,6 +74,7 @@
   export default {
     components: {
       Header,
+      SecondHeader,
       Footer,
       BaseIcon,
       Twitter,
@@ -145,99 +160,15 @@
       }
     }
   }
-
 </script>
 
 <style lang="postcss">
-  .column {
-    width: 50%;
-    padding: 10px;
-    word-wrap: break-word;
-  }
-
   .txt {
-    width: 100%;
     height: auto;
     font-size: 26px;
-    color: #333;
-    position: relative;
-    letter-spacing: .1em;
-    line-height: 1.5em;
-    padding-top: 53px;
-    padding-bottom: 5%;
-    margin-right: -30px;
-    float: right;
     -ms-writing-mode: tb-rl;
     -webkit-writing-mode: vertical-rl;
     writing-mode: vertical-rl;
-    columns: 10px 1;
-  }
-
-  #prev {
-    left: 10px;
-  }
-
-  .prev-drawer {
-    position: absolute;
-    top: 0;
-    bottom: 70px;
-    width: 38px;
-    height: 70px;
-    margin: auto 0;
-    cursor: pointer;
-    padding: 20px 10px;
-  }
-
-  .prev-drawer:hover {
-    -webkit-transition: all 0.2s ease-in-out 0s;
-    transition: all 0.2s ease-in-out 0s;
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-  }
-
-  #next {
-    right: 10px;
-  }
-
-  .next-drawer {
-    position: absolute;
-    top: 0;
-    bottom: 70px;
-    width: 51px;
-    height: 70px;
-    margin: auto 0;
-    cursor: pointer;
-    padding: 20px 10px;
-  }
-
-  .next-drawer:hover {
-    -webkit-transition: all 0.2s ease-in-out 0s;
-    transition: all 0.2s ease-in-out 0s;
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-  }
-
-  .pagination {
-    width: 100%;
-    bottom: 7px;
-    left: 0;
-    right: 0;
-    padding: 0;
-    margin: auto;
-    position: absolute;
-    height: 60px;
-    text-align: center;
-  }
-
-  ul {
-    width: 100%;
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
   }
 
   .pagination span {
@@ -266,32 +197,10 @@
     padding: 15px 7px;
   }
 
-  .profile-link {
-    position: absolute;
-    left: 15px;
-    bottom: 7px;
-    height: 45px;
-    background-size: 50px 50px;
-  }
-
-  .sns-link {
-    position: absolute;
-    right: 5px;
-    bottom: 10px;
-    height: 75px;
-    padding-right: 25px;
-    background-size: 50px 50px;
-  }
-
-  .sns-link li {
-    padding-left: 35px;
-  }
-
   .sns-link li:hover {
     -webkit-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-
 </style>
