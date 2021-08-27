@@ -91,7 +91,9 @@
           attrs: {
             name: this.name,
             height: "auto",
-            scrollable: true
+            scrollable: true,
+            resizable: "resizable",
+            width: "65%"
           }
         },
         [
