@@ -1,24 +1,45 @@
 <template>
   <section>
-    <Header />
-    <div class="row">
-      <div class="mantra-column">
-        <paginate name="mantras" :list="mantras" :per="perCount">
-          <div class="mantra mt-5">
-            <mantra v-for="(mantra, index) in paginated('mantras')" :key="index" :name="mantra.name"
-              :pronounce="mantra.pronounce" :typing="typing" :store="typedMantras" />
-          </div>
-        </paginate>
+    <Header class="-mt-2" />
+    <hr class="mt-1" />
+    <div class="grid md:grid-cols-8 pt-6">
+      <div class="flex col-span-4">
+        <div class="mantra-column">
+          <paginate name="mantras" :list="mantras" :per="perCount">
+            <div class="mantra">
+              <mantra v-for="(mantra, index) in paginated('mantras')" :key="index" :name="mantra.name"
+                :pronounce="mantra.pronounce" :typing="typing" :store="typedMantras" />
+            </div>
+          </paginate>
+        </div>
+        <footer>
+          <paginate-links class="cursor-pointer" for="mantras" :show-step-links="true" />
+        </footer>
       </div>
-      <footer>
-        <paginate-links class="cursor-pointer" for="mantras" :show-step-links="true" />
-      </footer>
-      <div class="column2"></div>
-      <div class="column3 mt-20">
+      <div class="flex col-span-2 pl-12 hidden md:block">
         <input-mantra v-model="typing" :mantras="mantras" v-on:store-typing="storeTyping"></input-mantra>
       </div>
-      <div class="column4 mt-28">
-        <span class="mantra" style="font-size: 30px;">{{this.$nuxt.$route.params.slug}}</span>
+      <div class="flex flex-col col-span-2 justify-start p-16">
+        <div class="grid grid-cols-2 mb-3">
+          <div class="tag-badge">
+        　  日蓮宗
+           </div>
+        </div>
+        <span class="text-3xl">{{this.$nuxt.$route.params.slug}}</span>
+        <div class="pt-3">
+          【始めに】この感想文は、私の文章力向上の目的で作成しております。この文章を読んだ方は、　感の映画　であり、夏の風物詩として有名ですね。　
+        </div>
+        <div class="grid grid-cols-2 mt-4 gap-2">
+          <div class="twitter-badge mt-4">
+            twitter
+          </div>
+          <div class="facebook-badge mt-4">
+            facebook
+          </div>
+        </div>
+        <div class="share-badge mt-4">
+          URLでシェア
+        </div>
       </div>
     </div>
   </section>
@@ -26,11 +47,22 @@
 
 <script>
   import Header from '@/components/Header.vue'
+  import BaseIcon from '@/components/svg/BaseIcon.vue'
+  import Twitter from '@/components/svg/Twitter.vue'
+  import Facebook from '@/components/svg/Facebook.vue'
+  import LineIcon from '@/components/svg/Line.vue'
+
   export default {
     components: {
       Header,
       'Mantra': () => import('@/components/Mantra.vue'),
       'inputMantra': () => import('@/components/inputMantra.vue')
+    },
+    components: {
+      BaseIcon,
+      Twitter,
+      Facebook,
+      LineIcon
     },
     data() {
       return {
@@ -66,56 +98,32 @@
         } else {
           return false
         }
-      },
+      }
     }
   }
 
 </script>
 
 <style lang="postcss">
+  .header-txt {
+    height: auto;
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+  }
+
   .mantra-column {
     float: left;
-    width: 50%;
+    width: 100%;
     padding: 5px;
     word-wrap: break-word;
-  }
-
-  .column3 {
-    float: left;
-    width: 35%;
-    padding-left: 100px;
-    word-wrap: break-word;
-  }
-
-  .column4 {
-    float: left;
-    width: 5%;
-    padding-left: 30px;
-    word-wrap: break-word;
-  }
-
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  .row {
-    margin-top: -60px;
   }
 
   .mantra {
     width: 100%;
     height: auto;
-    font-size: 17px;
-    color: #333;
-    position: relative;
     letter-spacing: .1em;
     line-height: 1.5em;
-    padding-top: 53px;
-    padding-bottom: 5%;
-    margin-right: -30px;
-    float: right;
     -ms-writing-mode: tb-rl;
     -webkit-writing-mode: vertical-rl;
     writing-mode: vertical-rl;
@@ -229,15 +237,31 @@
     padding: 0 15px 0 15px;
   }
 
-  .output_section {
-    writing-mode: vertical-rl;
-    padding-left: 330px;
-    padding-top: 53px;
+  .tag-badge {
+    @apply inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-black;
+    &:hover {
+      @apply bg-indigo-600 text-white;
+    }
   }
 
-  .output_section p {
-    font-size: 17px;
-    padding-left: 15;
+  .twitter-badge {
+    @apply inline-block bg-blue-200 rounded-md px-3 py-1 text-sm font-semibold text-white;
+    &:hover {
+      @apply bg-indigo-600 text-white;
+    }
   }
 
+  .facebook-badge {
+    @apply inline-block bg-blue-500 rounded-md px-3 py-1 text-sm font-semibold text-white;
+    &:hover {
+      @apply bg-indigo-600 text-white;
+    }
+  }
+
+  .share-badge {
+    @apply inline-block bg-gray-200 rounded-md px-3 py-1 text-sm font-semibold text-white;
+    &:hover {
+      @apply bg-indigo-600 text-white;
+    }
+  }
 </style>

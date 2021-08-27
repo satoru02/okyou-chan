@@ -1,7 +1,7 @@
 <template>
   <section>
     <Header />
-    <SecondHeader v-if="this.$route.path === '/'" />
+    <SecondHeader />
 
     <div class="grid grid-cols-3">
       <div class="pt-64 flex justify-start pl-6">

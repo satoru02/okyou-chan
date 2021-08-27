@@ -1,14 +1,18 @@
 <template>
   <section>
-    <input v-bind="$attrs" v-bind:value="value" v-on:input="$emit('input', $event.target.value), reinput()"
-      placeholder="お経をなぞる" v-on:keyup.enter="$emit('store-typing', value), checkTyping(value)">
-    <div class="output_section">
-      <p>このお経の意味は・・</p>
-      <transition name="display-meaning">
-        <div v-if="meaning != ''" class="meaning">
-          <h3>{{ this.meaning }}</h3>
-        </div>
-      </transition>
+    <div class="flex flex-col">
+      <div>
+        <input v-bind="$attrs" v-bind:value="value" v-on:input="$emit('input', $event.target.value), reinput()"
+          placeholder="お経をなぞる" v-on:keyup.enter="$emit('store-typing', value), checkTyping(value)">
+      </div>
+      <div class="grid justify-end pt-4">
+        <p class="output_section">このお経の意味は・・</p>
+        <transition name="display-meaning">
+          <div v-if="meaning != ''" class="meaning">
+            <h3>{{ this.meaning }}</h3>
+          </div>
+        </transition>
+      </div>
     </div>
   </section>
 </template>
@@ -49,8 +53,7 @@
 
 <style lang="postcss">
   input {
-    width: 88%;
-    padding: 5px 10px;
+    width: 100%;
     display: inline-block;
     border: 0.5px solid #111;
     border-radius: 4px;
@@ -88,4 +91,7 @@
     padding-left: 250px;
   }
 
+  .output_section {
+    writing-mode: vertical-rl;
+  }
 </style>
