@@ -1,13 +1,14 @@
 export default {
   target: 'static',
   ssr: 'false',
+  spa: 'true',
   head: {
     title: 'お経ちゃん | 心を鎮める写経アプリ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'description', name: 'description', content: '' },
       { hid: 'twitter:card', property:'twitter:card', content: 'summary_large_image'},
       { hid: 'twitter:url', property: 'twitter:card', content: 'https://okyou-chan.com'},
       { hid: 'twitter:site', property: 'twitter:site', content: '@okyouchan'},
@@ -31,10 +32,15 @@ export default {
     API_GATEWAY: process.env.API_GATEWAY,
   },
 
+  css: [
+    '@fortawesome/fontawesome-svg-core/styles.css'
+  ],
+
   plugins: [
     '~plugins/vue-pagination.js',
     '~/plugins/axios',
-    '~plugins/vue-js-modal.js'
+    '~plugins/vue-js-modal.js',
+    '~plugins/fontAwesome.js',
   ],
 
   components: true,

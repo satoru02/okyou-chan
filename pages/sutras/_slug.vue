@@ -19,27 +19,38 @@
       <div class="flex col-span-2 pl-12 hidden md:block">
         <input-mantra v-model="typing" :mantras="mantras" v-on:store-typing="storeTyping"></input-mantra>
       </div>
-      <div class="flex flex-col col-span-2 justify-start p-16">
-        <div class="grid grid-cols-2 mb-3">
-          <div class="tag-badge">
-        　  日蓮宗
-           </div>
+      <div class="flex flex-col col-span-2 justify-start px-10">
+        <div class="mb-4">
+          <button class="tag-badge">
+            日蓮宗
+          </button>
         </div>
         <span class="text-3xl">{{this.$nuxt.$route.params.slug}}</span>
         <div class="pt-3">
-          【始めに】この感想文は、私の文章力向上の目的で作成しております。この文章を読んだ方は、　感の映画　であり、夏の風物詩として有名ですね。　
+          『般若波羅蜜多心経』（はんにゃはらみったしんぎょう、梵: Prajñā-pāramitā-hṛdaya、
+          プラジュニャーパーラミター・フリダヤ）は、大乗仏教に分類される般若経典群の思想の核心を簡潔に説いた仏典[1]。『般若心経』（はんにゃしんぎょう）は略称[1]。
+          仏教の全経典の中でも最も短いもののひとつ[1]。古くから日本の在家信者に愛唱される経典であり[2]、複数の宗派において読誦経典の一つとして広く用いられている。
         </div>
         <div class="grid grid-cols-2 mt-4 gap-2">
-          <div class="twitter-badge mt-4">
-            twitter
-          </div>
-          <div class="facebook-badge mt-4">
-            facebook
-          </div>
+          <button class="cursor-pointer twitter-badge mt-4">
+            <client-only>
+              <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }" style="font-size: 15px" />
+            </client-only>
+            ツイート
+          </button>
+          <button class="cursor-pointer facebook-badge mt-4">
+            <client-only>
+              <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook' }" style="font-size: 15px" />
+            </client-only>
+            シェア
+          </button>
         </div>
-        <div class="share-badge mt-4">
+        <button class="cursor-pointer share-badge mt-4">
+          <client-only>
+            <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'share' }" style="font-size: 15px" />
+          </client-only>
           URLでシェア
-        </div>
+        </button>
       </div>
     </div>
   </section>
@@ -54,15 +65,13 @@
 
   export default {
     components: {
-      Header,
       'Mantra': () => import('@/components/Mantra.vue'),
-      'inputMantra': () => import('@/components/inputMantra.vue')
-    },
-    components: {
+      'inputMantra': () => import('@/components/inputMantra.vue'),
+      Header,
       BaseIcon,
       Twitter,
       Facebook,
-      LineIcon
+      LineIcon,
     },
     data() {
       return {
@@ -238,14 +247,17 @@
   }
 
   .tag-badge {
-    @apply inline-block bg-gray-200 rounded px-3 py-1 text-sm font-semibold text-black;
+    @apply inline-block bg-gray-800 rounded px-3 py-1 text-sm font-semibold text-white;
+    font-family: "Roboto", "Arial", "sans-serif";
     &:hover {
       @apply bg-indigo-600 text-white;
     }
   }
 
   .twitter-badge {
-    @apply inline-block bg-blue-200 rounded-md px-3 py-1 text-sm font-semibold text-white;
+    @apply inline-block rounded-md px-3 py-1 text-sm font-semibold text-white;
+    background-color: #1d9bf0;
+    font-family: "Roboto", "Arial", "sans-serif";
     &:hover {
       @apply bg-indigo-600 text-white;
     }
@@ -253,15 +265,18 @@
 
   .facebook-badge {
     @apply inline-block bg-blue-500 rounded-md px-3 py-1 text-sm font-semibold text-white;
+    font-family: "Roboto", "Arial", "sans-serif";
     &:hover {
       @apply bg-indigo-600 text-white;
     }
   }
 
   .share-badge {
-    @apply inline-block bg-gray-200 rounded-md px-3 py-1 text-sm font-semibold text-white;
+    @apply inline-block bg-gray-200 rounded-md px-3 py-1 text-sm font-semibold text-gray-600;
+    font-family: "Roboto", "Arial", "sans-serif";
     &:hover {
       @apply bg-indigo-600 text-white;
     }
   }
+
 </style>
