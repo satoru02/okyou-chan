@@ -13,8 +13,8 @@
             </div>
           </paginate>
         </div>
-        <footer class="hidden md:block">
-          <paginate-links class="cursor-pointer" for="mantras" :show-step-links="true" />
+        <footer class="paging hidden md:block">
+          <paginate-links :limit="3" class="cursor-pointer" for="mantras" :show-step-links="true" />
         </footer>
       </div>
 
@@ -58,22 +58,28 @@
         </button>
       </div>
 
-      <div v-if="this.windowWidth < 594"
-        class="rounded-3xl flex col-span-4 grid grid-cols-4 h-full pt-8 pl-28 bg-gray-100">
-        <div class="flex col-span-2 mobile-meaning text-base">
-          心経』（はんにゃはらみったしんぎょう、梵: Prajñā-pāramitā-hṛdaya、
-          プラジュニャーパーラミター・フリダヤ）は、大乗仏教に分類される般若経典群の思想の核心を簡潔に説いた仏典[1]。『般若心経』（はんにゃしんぎょう）は略称[1]。
-          仏教の全経典の中でも最も短いもののひとつ[1]。古
-        </div>
-        <div class="flex col-span-1 mobile-mantra-column flex justify-end">
-          <paginate name="mantras" :list="mantras" :per="perCount">
-            <div class="mobile-mantra">
-              <mantra v-for="(mantra, index) in paginated('mantras')" :key="index" :name="mantra.name"
-                :pronounce="mantra.pronounce" :typing="typing" :store="typedMantras" />
+      <div v-if="this.windowWidth < 594" class="rounded-3xl flex-col flex col-span-4 bg-gray-100">
+        <div class="grid grid-cols-4 h-full pt-8 pl-28">
+          <div class="flex col-span-2 text-base">
+            <div class="mobile-meaning">
+              心経』（はんにゃはらみったしんぎょう、梵: Prajñā-pāramitā-hṛdaya、
+              プラジュニャーパーラミター・フリダヤ）は、大乗仏教に分類される般若経典群の思想の核心を簡潔に説いた仏典[1]。『般若心経』（はんにゃしんぎょう）は略称[1]。
+              仏教の全経典の中でも最も短いもののひとつ[1]。古
             </div>
-          </paginate>
+          </div>
+          <div class="flex col-span-1 mobile-mantra-column flex justify-end">
+            <paginate name="mantras" :list="mantras" :per="perCount">
+              <div class="mobile-mantra">
+                <mantra v-for="(mantra, index) in paginated('mantras')" :key="index" :name="mantra.name"
+                  :pronounce="mantra.pronounce" :typing="typing" :store="typedMantras" />
+              </div>
+            </paginate>
+          </div>
+          <div class="flex col-span-1">
+          </div>
         </div>
-        <div class="flex col-span-1">
+        <div class="pl-16 max-w-xl">
+          <paginate-links :limit="5" class="paging cursor-pointer" for="mantras" :show-step-links="true" />
         </div>
       </div>
 
@@ -123,17 +129,21 @@
     },
     mounted() {
       this.getSutras()
+      this.setPerCount()
     },
     watch: {
       windowWidth() {
+        this.setPerCount()
+      }
+    },
+    methods: {
+      setPerCount() {
         if (this.windowWidth < 594) {
           this.perCount = 1
         } else {
           this.perCount = 52
         }
-      }
-    },
-    methods: {
+      },
       async getSutras() {
         let config = {
           headers: {
@@ -246,32 +256,13 @@
     text-align: center;
   }
 
-  ul.paginate-links.li {
-    writing-mode: horizontal-tb;
-  }
-
-  .paginate-links.mantras {
-    user-select: none;
-
-    a {
-      cursor: pointer;
-      color: rgb(32, 29, 27);
-    }
-
-    li.active a {
-      font-weight: bold;
-    }
-
-    li.next:before {
-      content: ' | ';
-      margin-right: 13px;
-      color: #ddd;
-    }
-
-    li.disabled a {
-      color: #ccc;
-      cursor: no-drop;
-    }
+  .paging li {
+    list-style-type: none;
+    display: inline-block;
+    padding-right: 8%;
+    width: auto;
+    padding-left: 0;
+    margin-left: 0;
   }
 
   .type-input {
