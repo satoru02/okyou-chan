@@ -19,7 +19,7 @@
       </div>
 
       <div class="flex col-span-2 pl-12 hidden md:block">
-        <input-mantra v-model="typing" :mantras="mantras" v-on:store-typing="storeTyping"></input-mantra>
+        <input-mantra v-model="typing" :mantras="mantras" v-on:store-typing="storeTyping" />
       </div>
 
       <div class="flex flex-col col-span-2 justify-start px-10">
@@ -78,21 +78,17 @@
           <div class="flex col-span-1">
           </div>
         </div>
-        <div class="pl-16 max-w-xl">
+        <div class="pl-32 max-w-xl">
           <paginate-links :limit="5" class="paging cursor-pointer" for="mantras" :show-step-links="true" />
         </div>
       </div>
-
     </div>
   </section>
 </template>
 
 <script>
   import Header from '@/components/Header.vue'
-  import BaseIcon from '@/components/svg/BaseIcon.vue'
-  import Twitter from '@/components/svg/Twitter.vue'
-  import Facebook from '@/components/svg/Facebook.vue'
-  import LineIcon from '@/components/svg/Line.vue'
+
   import {
     useWindowSize
   } from 'vue-window-size';
@@ -102,10 +98,6 @@
       'Mantra': () => import('@/components/Mantra.vue'),
       'inputMantra': () => import('@/components/InputMantra.vue'),
       Header,
-      BaseIcon,
-      Twitter,
-      Facebook,
-      LineIcon,
     },
     setup() {
       const {
@@ -122,7 +114,7 @@
         endpoint: process.env.API_GATEWAY,
         mantras: [],
         paginate: ['mantras'],
-        perCount: 52,
+        perCount: 42,
         typedMantras: [],
         typing: '',
       }
@@ -141,7 +133,7 @@
         if (this.windowWidth < 594) {
           this.perCount = 1
         } else {
-          this.perCount = 52
+          this.perCount = 42
         }
       },
       async getSutras() {
@@ -193,6 +185,7 @@
     -webkit-writing-mode: vertical-rl;
     writing-mode: vertical-rl;
     columns: 10px 1;
+    word-wrap: break-word;
   }
 
   .mantra::before {
@@ -224,6 +217,8 @@
     margin-right: -1;
     font-size: 17px;
     margin-right: -10;
+    word-wrap: break-word;
+    /* height: auto; */
   }
 
   .mantra ruby {
@@ -259,7 +254,7 @@
   .paging li {
     list-style-type: none;
     display: inline-block;
-    padding-right: 8%;
+    padding-right: 5%;
     width: auto;
     padding-left: 0;
     margin-left: 0;
