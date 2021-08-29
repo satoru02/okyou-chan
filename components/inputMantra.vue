@@ -6,7 +6,7 @@
           placeholder="お経をなぞる" v-on:keyup.enter="$emit('store-typing', value), checkTyping(value)">
       </div>
       <div class="grid justify-end pt-4">
-        <p class="output_section">このお経の意味は・・</p>
+        <p class="output_section text-xl text-gray-700">このお経の意味は・・</p>
         <transition name="display-meaning">
           <div v-if="meaning != ''" class="meaning">
             <h3>{{ this.meaning }}</h3>
