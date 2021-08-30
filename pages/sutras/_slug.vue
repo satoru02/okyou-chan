@@ -49,7 +49,7 @@
             シェア
           </button>
         </div>
-        <button class="cursor-pointer share-badge mt-4 mb-4" @click="share()">
+        <button class="cursor-pointer share-badge mt-4 mb-4" @click="urlCopy()">
           <client-only>
             <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'share' }" style="font-size: 15px" />
           </client-only>
@@ -86,7 +86,6 @@
 </template>
 
 <script>
-
   import {
     useWindowSize
   } from 'vue-window-size';
@@ -160,6 +159,13 @@
           '_blank'
         );
       },
+      urlCopy() {
+        navigator.clipboard.writeText(window.location.href).then(function() {
+          alert("urlをコピーしました。")
+        }, function (err) {
+          alert('Urlのコピーに失敗しました。')
+        })
+      }
     },
     head() {
       return {
@@ -220,7 +226,6 @@
     font-size: 17px;
     margin-right: -10;
     word-wrap: break-word;
-    /* height: auto; */
   }
 
   .mantra ruby {
