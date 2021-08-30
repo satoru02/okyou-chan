@@ -160,6 +160,11 @@
           '_blank'
         );
       },
+    },
+    head() {
+      return {
+        title: `${this.$nuxt.$route.params.slug} | 心を鎮める写経アプリ`
+      }
     }
   }
 
