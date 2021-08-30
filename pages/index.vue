@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Header :sutras="sutras" />
     <SecondHeader />
 
     <div class="grid grid-cols-3">
@@ -60,32 +59,20 @@
 </template>
 
 <script>
-  import Header from '@/components/Header.vue'
   import SecondHeader from '@/components/SecondHeader.vue'
-  import Footer from '@/components/Footer.vue'
   import BaseIcon from '@/components/svg/BaseIcon.vue'
   import Twitter from '@/components/svg/Twitter.vue'
   import Facebook from '@/components/svg/Facebook.vue'
   import LineIcon from '@/components/svg/Line.vue'
   import anime from 'animejs';
 
-  const getSutras = () => import('../static/sutras.json').then(j => j.default || j);
-
   export default {
     components: {
-      Header,
       SecondHeader,
-      Footer,
       BaseIcon,
       Twitter,
       Facebook,
       LineIcon
-    },
-    async asyncData({req}){
-      const sutras = await getSutras()
-      return {
-        sutras,
-      }
     },
     data() {
       return {

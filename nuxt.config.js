@@ -41,6 +41,7 @@ export default {
     '~/plugins/axios',
     '~plugins/vue-js-modal.js',
     '~plugins/fontAwesome.js',
+    '~plugins/globalMixin.js',
   ],
 
   components: true,

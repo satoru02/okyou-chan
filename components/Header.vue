@@ -1,15 +1,16 @@
 <template>
-  <div class="grid grid-cols-2 pt-4">
+  <div class="grid grid-cols-2 pt-1">
     <div class="flex justify-start pl-6 text-black text-2xl">
       <span class="cursor-pointer" @click="movePath()">
         お経ちゃん
       </span>
     </div>
 
-    <ul class="menu flex justify-end">
+    <ul class="menu flex justify-end mt-1">
       <li class="grid grid-cols-1"
        @click="dropMenu = true"
-       @mouseover="dropMenu = true" @mouseleave="dropMenu = false">
+       @mouseover="dropMenu = true"
+       @mouseleave="dropMenu = false">
         <a class="flex justify-end">
           <BaseIcon class="cursor-pointer" icon-name="icon-menu-mark" :viewBox="'0 0 512 512'" :iconColor="'#111111'" :height="'25'"
             :width="'25'">
@@ -17,7 +18,7 @@
           </BaseIcon></a>
         <transition name="fade" class="rounded">
           <ul v-if="dropMenu" @click="dropMenu = false">
-            <li v-for="(menu, index) in sutras" :key="index">
+            <li v-for="(menu, index) in this.sutras" :key="index">
               <a @click="sutraPage(menu.name)" class="cursor-pointer">
                 {{ menu.name }}
               </a>
@@ -39,11 +40,6 @@
     components: {
       BaseIcon,
       MenuIcon,
-    },
-    props: {
-      sutras: {
-        type: Array,
-      }
     },
     data() {
       return {

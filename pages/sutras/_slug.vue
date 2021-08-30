@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Header class="-mt-2" />
     <hr class="mt-1" />
     <div class="grid md:grid-cols-8 pt-6">
 
@@ -87,7 +86,6 @@
 </template>
 
 <script>
-  import Header from '@/components/Header.vue'
 
   import {
     useWindowSize
@@ -97,7 +95,6 @@
     components: {
       'Mantra': () => import('@/components/Mantra.vue'),
       'inputMantra': () => import('@/components/InputMantra.vue'),
-      Header,
     },
     setup() {
       const {
