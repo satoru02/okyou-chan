@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Header />
+    <Header :sutras="sutras" />
     <SecondHeader />
 
     <div class="grid grid-cols-3">
