@@ -12,15 +12,12 @@
 Okyou-chan is a typing application that allows you to type sutras of various Buddhist sects.
 
 ## Screenshot
-___
  <img src="https://user-images.githubusercontent.com/40885517/131439189-3db34c45-09a8-45c8-b553-beb16bb53b06.jpg" alt="エビフライトライアングル" title="サンプル">
 
 ## Architecture
-___
 ![okyou-chan](https://user-images.githubusercontent.com/40885517/131464779-e2d42f6f-fde8-4fd6-8606-231191e7c04e.jpg)
 
 ## Build
-___
 ```
 clone the repo.
 $ git clone https://github.com/satoru02/okyou-chan.git
@@ -43,5 +40,4 @@ $ npm run generate
 ```
 
 ## License
-___
 MIT
