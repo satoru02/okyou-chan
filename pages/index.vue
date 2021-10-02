@@ -10,7 +10,7 @@
       </div>
       <div class="flex justify-center items-center pt-10">
         <div @click="movePath(sutra)" class="txt slides text-black cursor-pointer hover:text-lg" v-for="(sutra, index) in sutras" :key="index">
-          {{ sutra["name"] }} <span class="text-gray-600">・・・ お経の意味を下に書く</span>
+          {{ sutra["name"] }} <span class="text-gray-600">・・・ {{sutra["meaning"]}}</span>
         </div>
       </div>
       <div class="pt-64 flex justify-end pr-6">

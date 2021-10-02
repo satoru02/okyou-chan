@@ -29,9 +29,7 @@
         </div>
         <span class="text-xl font-semibold md:text-3xl">{{this.$nuxt.$route.params.slug}}</span>
         <div class="pt-3 text-sm md:text-base">
-          『般若波羅蜜多心経』（はんにゃはらみったしんぎょう、梵: Prajñā-pāramitā-hṛdaya、
-          プラジュニャーパーラミター・フリダヤ）は、大乗仏教に分類される般若経典群の思想の核心を簡潔に説いた仏典[1]。『般若心経』（はんにゃしんぎょう）は略称[1]。
-          仏教の全経典の中でも最も短いもののひとつ[1]。古くから日本の在家信者に愛唱される経典であり[2]、複数の宗派において読誦経典の一つとして広く用いられている。
+          {{ sutra.description }}
         </div>
         <div class="grid grid-cols-2 gap-2">
           <button class="cursor-pointer twitter-badge mt-4"
@@ -108,6 +106,7 @@
     data() {
       return {
         endpoint: process.env.API_GATEWAY,
+        sutra: "",
         mantras: [],
         paginate: ['mantras'],
         perCount: 42,
@@ -143,7 +142,8 @@
           .catch(err => console.log(err))
       },
       fetchSuccessful(res) {
-        this.mantras = res.data.mantras
+        this.sutra = res.data
+        this.mantras = this.sutra.mantras
       },
       storeTyping(value) {
         if (value !== '') {
