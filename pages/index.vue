@@ -116,7 +116,6 @@
           textWrapper.classList.remove("selection")
         }
 
-        var i;
         var x = document.getElementsByClassName("slides");
 
         if (n > x.length) {
